@@ -30,10 +30,10 @@ export const fetchAsync = async (url, setData, setLoading, setError) =>{
 	}
 }
 
-export const fetchAxios = async (url, setData, setLoading, setError) =>{
+export const fetchAxios = async (url, setData, setLoading, setError, id) =>{
 	try {
 		const res = await instance(url)
-		setData(res.data.results)
+		setData(id ? res.data : res.data.results)
 		setLoading(false)
 	} catch(err){
 		console.log(err)

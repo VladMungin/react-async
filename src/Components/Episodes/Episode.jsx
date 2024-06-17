@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
+import { fetchAxios } from '../../API/api'
 import { instance } from '../../utils/const'
 
 
@@ -14,18 +15,19 @@ const Episode = () => {
 	const [airDateEdit,setAirDateEdit] = useState();
 
 	useEffect(()=>{
-		const loadEpisode = async () =>{
-			try{
-				const res = await instance(`episode/${id}`)
-				setEpisode(res.data)
-				setValueLoading(false)
-			} catch(err){
-				console.log(err)
-				setErr(true)
-			}
-		}
-		loadEpisode()
-	},[])
+		fetchAxios(`episode/${id}`, setEpisode, setValueLoading, setErr, id)
+		// const loadEpisode = async () =>{
+		// 	try{
+		// 		const res = await instance(`episode/${id}`)
+		// 		setEpisode(res.data)
+		// 		setValueLoading(false)
+		// 	} catch(err){
+		// 		console.log(err)
+		// 		setErr(true)
+		// 	}
+		// }
+		// loadEpisode()
+	},[id])
 
 	async function handleClickDel(){
 		const res = await instance.delete(`/episode`,{
@@ -48,13 +50,13 @@ const Episode = () => {
 		<div>
 			{isLoading && !err ? (<p>Загрузка</p>) : (
 			<div>
-				<input defaultValue={episode.name} onChange={(e)=>{
+				<input defaultValue={episode?.name} onChange={(e)=>{
 					setNameEdit(e.target.value)
 				}}/>
-				<input defaultValue={episode.air_date} onChange={(e)=>{
+				<input defaultValue={episode?.air_date} onChange={(e)=>{
 					setAirDateEdit(e.target.value)
 				}}/>
-				<input defaultValue={episode.episode} onChange={(e)=>{
+				<input defaultValue={episode?.episode} onChange={(e)=>{
 					setEpisodeEdit(e.target.value)
 				}}/>
 				<button onClick={(e)=>{
