@@ -1,0 +1,13 @@
+.home{
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+}
+
+.card{
+	width: 200px;
+	border: 1px solid red;
+	padding: 5px;
+	border-radius: 5px;
+	height: 200px;
+	margin: 15px;
+}

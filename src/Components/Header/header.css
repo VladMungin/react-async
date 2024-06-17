@@ -1,0 +1,12 @@
+.header{
+	display: flex;
+	justify-content: center;
+}
+
+.link{
+	margin: 0 15px;
+	font-size: 18px;
+	text-decoration: none;
+	text-transform: uppercase;
+	color: #000;
+}
