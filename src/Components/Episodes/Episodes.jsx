@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { instance } from '../../utils/const'
+import { fetchAxios } from '../../API/api'
 import CardLink from '../Card/CardLink'
 const Episodes = () => {
 	const [isLoading,setValueLoading] = useState(true)
@@ -8,19 +8,20 @@ const Episodes = () => {
 	
 
 	useEffect(()=>{
-		const loadEpisodes = async () =>{
-			try{
-				const res = await instance('episode')
+		fetchAxios('episode', setEpisodes, setValueLoading, setErr)
+		// const loadEpisodes = async () =>{
+		// 	try{
+		// 		const res = await instance('episode')
 				
-				setEpisodes(res.data.results)
-				setValueLoading(false)
-			} catch (err){
-				console.log(err)
-				setErr(true)
-			}
+		// 		setEpisodes(res.data.results)
+		// 		setValueLoading(false)
+		// 	} catch (err){
+		// 		console.log(err)
+		// 		setErr(true)
+		// 	}
 			
-		}
-		loadEpisodes()
+		// }
+		// loadEpisodes()
 	})
 	return (
 		<div className='home'>

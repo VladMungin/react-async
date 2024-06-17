@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BASE_URL } from '../../utils/const'
+import { fetchAsync } from '../../API/api'
 import Card from '../Card/Card'
 
 const Locations = () => {
@@ -8,24 +8,25 @@ const Locations = () => {
 	const [locations, setLocations] = useState([])
 	//console.log(locations)
 	useEffect(()=>{
-		const loadLoc = async () =>{
-			try{
-				const res = await fetch(`${BASE_URL}/location`)
-				if(res.status == 200) {
-					const data = await res.json()
+		fetchAsync('location', setLocations, setValueLoading, setErr)
+		// const loadLoc = async () =>{
+		// 	try{
+		// 		const res = await fetch(`${BASE_URL}/location`)
+		// 		if(res.status == 200) {
+		// 			const data = await res.json()
 
-				setLocations(data.results)
-				setValueLoading(false)
-				} else {
-					setErr(err)
-				}
+		// 		setLocations(data.results)
+		// 		setValueLoading(false)
+		// 		} else {
+		// 			setErr(true)
+		// 		}
 				
-			} catch(err) {
-				console.log(err)
-			}
+		// 	} catch(err) {
+		// 		console.log(err)
+		// 	}
 			
-		}
-		loadLoc()
+		// }
+		
 	},[])
 	return (
 		<div className='home'>
