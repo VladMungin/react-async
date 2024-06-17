@@ -8,5 +8,10 @@
 	font-size: 18px;
 	text-decoration: none;
 	text-transform: uppercase;
-	color: #000;
+	color: inherit;
+}
+
+.dark{
+	background-color: #000;
+	color: #FFF;
 }

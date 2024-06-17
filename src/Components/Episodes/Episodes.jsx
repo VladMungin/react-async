@@ -1,14 +1,20 @@
+import { useAtomValue, useSetAtom } from 'jotai/react'
+import { atom } from 'jotai/vanilla'
 import React, { useEffect, useState } from 'react'
 import { fetchAxios } from '../../API/api'
 import CardLink from '../Card/CardLink'
+
+const episodesAtom =  atom([])
+
 const Episodes = () => {
 	const [isLoading,setValueLoading] = useState(true)
-	const [episodes, setEpisodes] = useState([])
-	const [err, setErr] = useState(false);
 	
+	const [err, setErr] = useState(false);
+	const setEpisodes = useSetAtom(episodesAtom)
+	const episodes = useAtomValue(episodesAtom)
 
 	useEffect(()=>{
-		fetchAxios('episode', setEpisodes, setValueLoading, setErr)
+		setEpisodes(fetchAxios('episode', setValueLoading, setErr))
 		// const loadEpisodes = async () =>{
 		// 	try{
 		// 		const res = await instance('episode')
@@ -22,7 +28,9 @@ const Episodes = () => {
 			
 		// }
 		// loadEpisodes()
-	})
+	}, [])
+
+	
 	return (
 		<div className='home'>
 			{isLoading && !err ? (<p>Загрузка</p>) : episodes.map(({id,name,episode}) =>{

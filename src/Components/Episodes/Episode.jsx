@@ -15,7 +15,7 @@ const Episode = () => {
 	const [airDateEdit,setAirDateEdit] = useState();
 
 	useEffect(()=>{
-		fetchAxios(`episode/${id}`, setEpisode, setValueLoading, setErr, id)
+		setEpisode(fetchAxios(`episode/${id}`, setValueLoading, setErr, id))
 		// const loadEpisode = async () =>{
 		// 	try{
 		// 		const res = await instance(`episode/${id}`)
@@ -28,7 +28,7 @@ const Episode = () => {
 		// }
 		// loadEpisode()
 	},[id])
-
+	console.log(episode)
 	async function handleClickDel(){
 		const res = await instance.delete(`/episode`,{
 			data:{
